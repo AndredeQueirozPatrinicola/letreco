@@ -1,15 +1,23 @@
 import { useState } from "react"
 
 export function LetterBox(props) {
-    const [letter, setLetter] = useState('');
+    const [state, setState] = useState({
+        letter : "",
+        isDisabled : props.isDisabled
+    });
+
     const handleChange = (e) => {
       const lastLetter = e.target.value.charAt(e.target.value.length - 1);
-      setLetter(lastLetter);
+      setState({
+        ...state,
+        letter : lastLetter
+      });
+      props.updateCurrentWord(props.componentId, lastLetter);
     };
-    console.log(props)
+
     const handleKeyDown = (event) => {
         if (event.key === 'Tab'){
-            console.log(props.componentId)
+
             if(props.componentId === 4){
                 event.preventDefault();
             }
@@ -20,7 +28,7 @@ export function LetterBox(props) {
     return (
       <div className="
               border-black
-              border-solid 
+              border-solid  
               border-2 
               w-24 
               h-24 
@@ -38,9 +46,10 @@ export function LetterBox(props) {
                   text-center
                   uppercase
               "
-          value={letter}
+          value={state.letter}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          disabled={state.isDisabled}
         />
       </div>
     );
