@@ -1,5 +1,5 @@
 
-import { LetterBoard } from "./components/LetterBoard";
+import LetterBoard from './components/LetterBoard'
 
 function App() {
 
