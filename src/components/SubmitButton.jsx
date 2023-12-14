@@ -1,10 +1,22 @@
 // LetterBoard.js
 import React from 'react';
 
-export const SubmitButton = (onSubmit) => {
+
+export const SubmitButton = ({ onSubmit }) => {
+  const handleClick = () => {
+    if (onSubmit && typeof onSubmit === 'function') {
+      onSubmit();
+    }
+  };
+
   return (
-    <button className="">
-        Submit
+    <button className="" onClick={handleClick}>
+      Submit
     </button>
   );
 };
+
+
+const gameState = {
+
+}
