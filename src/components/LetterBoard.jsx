@@ -1,41 +1,67 @@
-// LetterBoard.js
-import React, { useEffect, useState } from 'react';
-import LetterBoxLine from './LetterBoxLine'
+import React, { useState } from 'react';
+import LetterBoxLine from './LetterBoxLine';
+import LetterBox from './LetterBox';
 import { SubmitButton } from './SubmitButton';
+import { getNewGame } from '../game/Game';
 
 const LetterBoard = () => {
-  const [lines, setLines] = useState(Array.from({ length: 5 }, () => ({inGame:false, word:["","","","","",]})));
+  const [ gameState, setGameState ] = useState(getNewGame())
 
-  const handleLineChange = (lineIndex, lineState) => {
-    setLines((prev) => {
-      prev[lineIndex].word = lineState.word
-      return prev
+  const handleLineChange = (e, innerIndex, lineIndex) => {
+    const newLetter = e.target.value.slice(-1)
+    const newLine = [...gameState.board.values]
+
+    newLine[lineIndex][innerIndex] = newLetter
+
+    const newGameState = {
+      ...gameState,
+      board: {
+        values: newLine
+      }
+    }
+    setGameState(newGameState)
+
+  }
+
+  const handleSubmit = (e) => {
+    const newGameState = {
+      ...gameState
+    }
+    console.log({
+      ...newGameState,
+      turn: newGameState.turn++
     })
-  };
- 
-  const handleSubmit = () => {
+    setGameState(
+      {
+        ...newGameState,
+        turn: newGameState.turn++
+      }
+    )
+  }
 
-    console.log('Board submitted:', lines);
-  };
 
   return (
-    <>
-      <div className="flex flex-col justify-between h-full">
-      {lines.map((line, index) => {
-          console.log(line)
-          return (
-            <LetterBoxLine
-            key={index}
-            lineIndex={index}
-            onLineChange={(lineIndex, lineState) => handleLineChange(lineIndex, lineState)}
-          />
-          )
-        })}
+    <div className='flex flex-col'>
+      <div className="flex flex-col justify-between">
+        {console.log(gameState)}
+        {gameState.board.values.map((line, index) => (
+          <LetterBoxLine key={index}>
+            {line.map((input, innerIndex) => (
+              <LetterBox 
+                key={innerIndex} 
+                index={innerIndex} 
+                lineIndex={index}
+                letter={input}
+                target={gameState.target}
+                turn={gameState.turn}
+                handleLetterChange={(e) => handleLineChange(e, innerIndex, index)}
+              />
+            ))}
+          </LetterBoxLine>
+        ))}
       </div>
-      <SubmitButton
-        onSubmit={handleSubmit}
-      />
-    </>
+      <SubmitButton  handleSubmit={handleSubmit}/>
+    </div>
   );
 };
 
