@@ -6,7 +6,10 @@ const LetterBox = ({
    letter, 
    target,
    turn, 
-   handleLetterChange 
+   win,
+   lost,
+   handleLetterChange ,
+   handleEnter
 }) => {
 
   const getColor = () => {
@@ -24,18 +27,29 @@ const LetterBox = ({
         return 'bg-red-500'
       }
     }
+    if(win){
+      return 'bg-lime-500'
+    }
+    if(lost){
+      return 'bg-red-500'
+    }
   }
 
   const handleKeyDown = (e) => {
     if (e.code === "Tab" && index === 4) {
       e.preventDefault();
     }
+    if(e.code === 'Enter'){
+      e.preventDefault()
+      handleEnter()
+    }
+
   };
 
   return (
     <div className="border-solid border-2 w-16 h-16 rounded-lg flex justify-center items-center mx-1">
       {
-        turn === lineIndex ? (
+        (turn === lineIndex && !win && !lost) ? (
           <input
             className="bg-gray-800 text-white text-6xl w-full h-full text-center uppercase rounded-lg"
             value={letter}

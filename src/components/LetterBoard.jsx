@@ -20,25 +20,30 @@ const LetterBoard = () => {
       }
     }
     setGameState(newGameState)
-
   }
 
   const handleSubmit = (e) => {
     const newGameState = {
       ...gameState
     }
-    console.log({
-      ...newGameState,
-      turn: newGameState.turn++
-    })
-    setGameState(
-      {
-        ...newGameState,
-        turn: newGameState.turn++
-      }
-    )
-  }
+    const currLine = gameState.board.values[gameState.turn] 
+    const targetWord = gameState.target
 
+    if(currLine.join("").toUpperCase() === targetWord.join("").toUpperCase()){
+      newGameState.win = true;
+    }
+
+    if (!currLine.includes("")){
+      if(newGameState.turn === 4){
+        newGameState.lost = true;
+      }
+
+      if(!newGameState.win && !newGameState.lost){
+        newGameState.turn++ 
+      }
+      setGameState(newGameState)
+    } 
+  }
 
   return (
     <div className='flex flex-col'>
@@ -53,13 +58,23 @@ const LetterBoard = () => {
                 letter={input}
                 target={gameState.target}
                 turn={gameState.turn}
+                win={gameState.win}
+                lost={gameState.lost}
                 handleLetterChange={(e) => handleLineChange(e, innerIndex, index)}
+                handleEnter={handleSubmit}
               />
             ))}
           </LetterBoxLine>
         ))}
       </div>
       <SubmitButton  handleSubmit={handleSubmit}/>
+      {
+        gameState.win? (
+          <div>Voce venceu!</div>
+        ) : (
+          ""
+        )
+      }
     </div>
   );
 };
