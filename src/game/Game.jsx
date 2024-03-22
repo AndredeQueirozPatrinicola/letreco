@@ -4,7 +4,7 @@
 
 export const getNewGame = () => {
     return {
-        target: ["P", "O", "R", "T", "A"],
+        target: ["S", "A", "N", "T", "O"],
         turn: 0,
         board: {
             values: [
@@ -17,5 +17,3 @@ export const getNewGame = () => {
         }
     }
 } 
-
-

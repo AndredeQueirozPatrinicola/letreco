@@ -11,22 +11,17 @@ const LetterBox = ({
 
   const getColor = () => {
     if(turn < lineIndex){
-      return 'bg-gray-300'
+      return 'bg-gray-500'
     }
     else if(turn > lineIndex){
-      console.log(
-        letter,
-        target,
-        target[index]
-      )
       if(letter.toUpperCase() === target[index]){
-        return 'bg-lime-400'
+        return 'bg-lime-500'
       }
       else if(target.includes(letter.toUpperCase())){
-        return 'bg-yellow-400'
+        return 'bg-yellow-500'
       }
       else{
-        return 'bg-red-400'
+        return 'bg-red-500'
       }
     }
   }

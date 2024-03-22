@@ -43,7 +43,6 @@ const LetterBoard = () => {
   return (
     <div className='flex flex-col'>
       <div className="flex flex-col justify-between">
-        {console.log(gameState)}
         {gameState.board.values.map((line, index) => (
           <LetterBoxLine key={index}>
             {line.map((input, innerIndex) => (
