@@ -3,7 +3,7 @@ import { randomNumberInRange } from "../utils/randomNumber"
 
 
 export const Logo = () => {
-    const logoLetters = ['L', 'e', 't', 'r', 'e', 'c' , 'o']
+    const logoLetters = ['L', 'e', 't', 'r', 'i', 't' , 'a', 's']
     const colors = [
         "text-black",
         "text-lime-500",
