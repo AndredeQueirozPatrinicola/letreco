@@ -36,9 +36,6 @@ const LetterBox = ({
   }
 
   const handleKeyDown = (e) => {
-    if (e.code === "Tab" && index === 4) {
-      e.preventDefault();
-    }
     if(e.code === 'Enter'){
       e.preventDefault()
       handleEnter()
