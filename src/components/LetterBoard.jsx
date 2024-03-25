@@ -77,7 +77,6 @@ const LetterBoard = () => {
   return (
    <>
      <div className='flex flex-col'>
-      {console.log(gameState.target)}
       <div className='flex min-h-14 justify-center items-center'>
         {
           gameState.win? (
