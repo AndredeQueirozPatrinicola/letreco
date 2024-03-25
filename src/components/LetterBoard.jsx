@@ -63,7 +63,7 @@ const LetterBoard = () => {
         newGameState.win = true;
       }
       if (!currLine.includes("")){
-        if(newGameState.turn === 4){
+        if(newGameState.turn === 4 && !newGameState.win){
           newGameState.lost = true;
         }
         if(!newGameState.win && !newGameState.lost){
@@ -77,6 +77,7 @@ const LetterBoard = () => {
   return (
    <>
      <div className='flex flex-col'>
+      {console.log(gameState.target)}
       <div className='flex min-h-14 justify-center items-center'>
         {
           gameState.win? (
