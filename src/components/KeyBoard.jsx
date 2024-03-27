@@ -5,7 +5,7 @@ import { KeyBoardLetterBox } from "./KeyBoardLetterBox"
 export const KeyBoard = ({ letters }) => {
     const [ boardLetters, setBoardLetters ] = useState(letters)
     return (
-        <div className="my-10 w-[30rem]">
+        <div className="my-10 ">
             {
                 boardLetters.map((value, index) => {
                     return (

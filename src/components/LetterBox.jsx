@@ -12,6 +12,16 @@ const LetterBox = ({
    handleEnter
 }) => {
 
+  const isUnique = () => {
+    const letterSearch = target.filter((letters)=>{
+      return letters === letter.toUpperCase()
+    })
+    if(letterSearch.length > 1){
+      return false
+    }
+    return true
+  }
+
   const getColor = () => {
     if(turn < lineIndex){
       return 'bg-gray-500'
@@ -20,7 +30,7 @@ const LetterBox = ({
       if(letter.toUpperCase() === target[index]){
         return 'bg-lime-500'
       }
-      else if(target.includes(letter.toUpperCase())){
+      else if(target.includes(letter.toUpperCase()) && !isUnique() ){
         return 'bg-yellow-500'
       }
       else{
@@ -44,18 +54,18 @@ const LetterBox = ({
   };
 
   return (
-    <div className="border-solid border-2 w-16 h-16 rounded-lg flex justify-center items-center mx-1">
+    <div className="border-solid border-2 w-[3.5rem] h-[3.5rem] rounded-lg flex justify-center items-center mx-1">
       {
         (turn === lineIndex && !win && !lost) ? (
           <input
-            className="bg-gray-800 text-white text-6xl w-full h-full text-center uppercase rounded-lg"
+            className="bg-gray-800 text-white text-5xl w-full h-full text-center uppercase rounded-lg"
             value={letter}
             onChange={handleLetterChange}
             onKeyDown={handleKeyDown}
           />
         ) : (
           <div
-            className={`${getColor()} text-white text-6xl w-full h-full text-center uppercase rounded-lg`}
+            className={`${getColor()} text-white text-5xl w-full h-full text-center uppercase rounded-lg`}
           >{letter}</div>
         )
         
