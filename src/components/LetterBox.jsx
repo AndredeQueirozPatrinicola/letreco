@@ -30,7 +30,7 @@ const LetterBox = ({
       if(letter.toUpperCase() === target[index]){
         return 'bg-lime-500'
       }
-      else if(target.includes(letter.toUpperCase()) && !isUnique() ){
+      else if(target.includes(letter.toUpperCase())){
         return 'bg-yellow-500'
       }
       else{
